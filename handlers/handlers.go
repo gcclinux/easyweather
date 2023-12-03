@@ -11,7 +11,7 @@ type Config struct {
 	DB_NAME        []string `json:"DB_NAME"`
 	TB_NAME        []string `json:"TB_NAME"`
 	OpenWeatherApi []string `json:"OpenWeatherApi"`
-	StationValid   []string `json:"StationValid"`
+	StationValid   []bool   `json:"StationValid"`
 	WundergroupApi []string `json:"WundergroupApi"`
 	StationId      []string `json:"StationId"`
 	AdminPort      []string `json:"AdminPort"`

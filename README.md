@@ -21,7 +21,7 @@ Requires: APIKEY from either or both Weather Sites
     "DB_PASS": ["Passw0rd"],
     "DB_NAME": ["weather"],
     "TB_NAME": ["weather_table"],
-    "OpenWeatherApi": ["12345678909876543212345678909876"],
+    "OpenWeatherApi": ["00000000000000000000000000000000"],
     "StationValid": ["true"],
     "WundergroupApi": ["12345678909876543212345678909876"],
 	"StationId": ["Station_Name"],

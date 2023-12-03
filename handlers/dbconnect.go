@@ -3,6 +3,8 @@ package handlers
 import (
 	"database/sql"
 	"fmt"
+
+	_ "github.com/lib/pq"
 )
 
 func GetDBConnection() (*sql.DB, error) {
