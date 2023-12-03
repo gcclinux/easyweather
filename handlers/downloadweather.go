@@ -13,7 +13,7 @@ func DownloadWeather() {
 
 	StationId := config.StationId[0]
 	OpenWeatherApi := config.OpenWeatherApi[0]
-	WundergroupApi := config.WundergroupApi[0]
+	WundergroundApi := config.WundergroundApi[0]
 	StationValid := false
 
 	if len(OpenWeatherApi) != 32 || ValidateAPICount(OpenWeatherApi) {
@@ -24,20 +24,21 @@ func DownloadWeather() {
 		StationValid = true
 	}
 
-	if len(WundergroupApi) != 32 || ValidateAPICount(WundergroupApi) {
-		WundergroupApi = "invalid"
+	if len(WundergroundApi) != 32 || ValidateAPICount(WundergroundApi) {
+		WundergroundApi = "invalid"
 	}
 
 	if StationId == "" {
 		StationId = "invalid"
 	}
 
-	if StationValid && WundergroupApi != "invalid" && StationId != "invalid" && OpenWeatherApi != "invalid" {
-		valid, _ := getWundergroup()
+	if StationValid && WundergroundApi != "invalid" && StationId != "invalid" && OpenWeatherApi != "invalid" {
+		valid, error, _ := getWunderground()
 		if !valid {
 			valid, _ = getOpenWeather()
 			if !valid {
-				fmt.Println("Failed to collect weather, check your internet connection!")
+				fmt.Println("### Failed to collect weather! ###")
+				fmt.Println(error)
 			} else {
 				fmt.Println("Ready to upload")
 			}
@@ -53,41 +54,45 @@ func DownloadWeather() {
 }
 
 func getOpenWeather() (bool, WeatherData) {
-	panic("unimplemented")
+	var weatherData WeatherData
+	return false, weatherData
 }
 
-func getWundergroup() (bool, WeatherData) {
-	var url string
+func getWunderground() (bool, string, WeatherData) {
+	var url, error string
 	status := true
+
 	config := GetConfig()
 
 	url = fmt.Sprintf("https://api.weather.com/v2/pws/observations/current?stationId=%s&format=json&units=m&apiKey=%s&numericPrecision=decimal",
-		config.StationId[0], config.WundergroupApi[0])
+		config.StationId[0], config.WundergroundApi[0])
 
 	response, err := http.Get(url)
 	if err != nil {
-		fmt.Printf("Error making API request: %s\n", err)
+		error = fmt.Sprintf("Error: WundergroundApi making API request: %s\n", err)
 		status = false
 	}
 	defer response.Body.Close()
 
 	if response.StatusCode != http.StatusOK {
-		fmt.Printf("Error: %s\n", response.Status)
+		error = fmt.Sprintf("WundergroundApi API Error: %s\n", response.Status)
 		status = false
 	}
 
 	jsonData, err := io.ReadAll(response.Body)
 	if err != nil {
-		fmt.Printf("Error reading response body: %s\n", err)
+		error = fmt.Sprintf("Error: WundergroundApi reading response body: %s\n", err)
 		status = false
 	}
 
 	var weatherData WeatherData
-	err = json.Unmarshal([]byte(jsonData), &weatherData)
-	if err != nil {
-		fmt.Printf("Error decoding JSON: %s\n", err)
-		status = false
+	if status {
+		err = json.Unmarshal([]byte(jsonData), &weatherData)
+		if err != nil {
+			error = fmt.Sprintf("Error: WundergroundApi decoding JSON: %s\n", err)
+			status = false
+		}
 	}
 
-	return status, weatherData
+	return status, error, weatherData
 }
