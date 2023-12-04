@@ -31,8 +31,8 @@ winddir				winddir(integer)			float64						118
 humidity			humidity(integer)			float64		humidity		93
 qcStatus			qcStatus(integer)			float64						1	
 temp				temp(double)				float64		temp			3.6
-heatIndex			heatIndex(double)			float64		temp_max		3.6
-dewpt				dewpt(double)				float64		feels_like		2.5
+heatIndex			heatIndex(double)			float64		feels_like		3.6
+dewpt				dewpt(double)				float64		Convert			2.5
 windChill			windChill(double)			float64						3.7
 windSpeed			windSpeed(double)			float64		speed			1.1
 windGust			windGust(double)			float64		gust			1.8
