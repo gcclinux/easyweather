@@ -1,6 +1,8 @@
 package main
 
-import "weatherCollect/handlers"
+import (
+	"weatherCollect/handlers"
+)
 
 func main() {
 

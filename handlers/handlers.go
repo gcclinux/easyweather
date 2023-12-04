@@ -60,20 +60,20 @@ type WeatherData struct {
 }
 
 type Openweathermap struct {
-	Coord      Coord   `json:"coord"`
-	Weather    Weather `json:"weather"`
-	Base       string  `json:"base"`
-	Main       Main    `json:"main"`
-	Visibility int     `json:"visibility"`
-	Wind       Wind    `json:"wind"`
-	Rain       Rain    `json:"rain"`
-	Clouds     Clouds  `json:"clouds"`
-	Dt         int     `json:"dt"`
-	Sys        Sys     `json:"sys"`
-	Timezone   int32   `json:"timezone"`
-	ID         int     `json:"id"`
-	Name       string  `json:"name"`
-	Cod        int     `json:"cod"`
+	Coord      Coord     `json:"coord"`
+	Weather    []Weather `json:"weather"`
+	Base       string    `json:"base"`
+	Main       Main      `json:"main"`
+	Visibility int       `json:"visibility"`
+	Wind       Wind      `json:"wind"`
+	Rain       Rain      `json:"rain"`
+	Clouds     Clouds    `json:"clouds"`
+	Dt         int       `json:"dt"`
+	Sys        Sys       `json:"sys"`
+	Timezone   int32     `json:"timezone"`
+	ID         int       `json:"id"`
+	Name       string    `json:"name"`
+	Cod        int       `json:"cod"`
 }
 
 type Coord struct {

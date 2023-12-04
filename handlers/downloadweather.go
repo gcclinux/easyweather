@@ -95,19 +95,21 @@ func getOpenWeather() (bool, string, WeatherData) {
 
 	var openweatherData Openweathermap
 
-	var weatherData WeatherData
-	weatherData.Observations = make([]Observation, 23)
-
 	if status {
-
-		err = json.Unmarshal([]byte(jsonData), &openweatherData)
+		err = json.Unmarshal(jsonData, &openweatherData)
 		if err != nil {
 			error = fmt.Sprintf("Error: Openweathermap decoding JSON: %s\n", err)
 			status = false
 		}
+	}
 
+	var weatherData WeatherData
+	weatherData.Observations = make([]Observation, 23)
+
+	if status {
 		TimeUtc := ConvertSeconds(int64(openweatherData.Dt))
 		TimeLocal := strings.ReplaceAll(TimeUtc, "T", " ")
+		TimeLocal = strings.ReplaceAll(TimeLocal, "Z", "")
 
 		weatherData.Observations[0].ObsTimeUtc = ConvertTime(int64(openweatherData.Dt))
 		weatherData.Observations[0].ObsTimeLocal = TimeLocal
@@ -123,16 +125,22 @@ func getOpenWeather() (bool, string, WeatherData) {
 		weatherData.Observations[0].Humidity = openweatherData.Main.Humidity
 		weatherData.Observations[0].QCStatus = 1
 		weatherData.Observations[0].Metric.Temp = openweatherData.Main.Temp
-		weatherData.Observations[0].Metric.HeatIndex = openweatherData.Main.FeelsLike
-		weatherData.Observations[0].Metric.Dewpt = (weatherData.Observations[0].Metric.Temp - ((100 - weatherData.Observations[0].Humidity) / 5))
+		weatherData.Observations[0].Metric.HeatIndex = openweatherData.Main.Temp
+
+		number := (openweatherData.Main.Temp - ((100 - openweatherData.Main.Humidity) / 7))
+		_, err := fmt.Sscanf(fmt.Sprintf("%.2f", number), "%f", &number)
+		if err != nil {
+			fmt.Println("Error:", err)
+		}
+
+		weatherData.Observations[0].Metric.Dewpt = float64(number)
 		weatherData.Observations[0].Metric.WindChill = 0.0
 		weatherData.Observations[0].Metric.WindSpeed = openweatherData.Wind.Speed
 		weatherData.Observations[0].Metric.WindGust = openweatherData.Wind.Gust
 		weatherData.Observations[0].Metric.Pressure = openweatherData.Main.Pressure
 		weatherData.Observations[0].Metric.PrecipRate = 0.0
 		weatherData.Observations[0].Metric.PrecipTotal = 0.0
-		weatherData.Observations[0].Description = openweatherData.Weather.Description
-
+		weatherData.Observations[0].Description = openweatherData.Weather[0].Description
 	}
 
 	if error == "" {
