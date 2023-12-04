@@ -14,7 +14,9 @@ type Config struct {
 	StationValid    []bool   `json:"StationValid"`
 	WundergroundApi []string `json:"WundergroundApi"`
 	StationId       []string `json:"StationId"`
-	AdminPort       []string `json:"AdminPort"`
+	WebPort         []string `json:"WebPort"`
+	Language        []string `json:"Language"`
+	DefaultCity     []string `json:"DefaultCity"`
 }
 
 // Metric represents the nested "metric" object in the JSON structure
@@ -54,4 +56,66 @@ type Observation struct {
 // WeatherData represents the overall JSON structure
 type WeatherData struct {
 	Observations []Observation `json:"observations"`
+}
+
+type Openweathermap struct {
+	Coord      Coord     `json:"coord"`
+	Weather    []Weather `json:"weather"`
+	Base       string    `json:"base"`
+	Main       Main      `json:"main"`
+	Visibility int       `json:"visibility"`
+	Wind       Wind      `json:"wind"`
+	Rain       Rain      `json:"rain"`
+	Clouds     Clouds    `json:"clouds"`
+	Dt         int       `json:"dt"`
+	Sys        Sys       `json:"sys"`
+	Timezone   int32     `json:"timezone"`
+	ID         int       `json:"id"`
+	Name       string    `json:"name"`
+	Cod        int       `json:"cod"`
+}
+
+type Coord struct {
+	Lon float64 `json:"lon"`
+	Lat float64 `json:"lat"`
+}
+
+type Weather struct {
+	ID          int    `json:"id"`
+	Main        string `json:"main"`
+	Description string `json:"description"`
+	Icon        string `json:"icon"`
+}
+
+type Main struct {
+	Temp      float64 `json:"temp"`
+	FeelsLike float64 `json:"feels_like"`
+	TempMin   float64 `json:"temp_min"`
+	TempMax   float64 `json:"temp_max"`
+	Pressure  float64 `json:"pressure"`
+	Humidity  float64 `json:"humidity"`
+	SeaLevel  int     `json:"sea_level"`
+	GrndLevel int     `json:"grnd_level"`
+}
+
+type Wind struct {
+	Speed float64 `json:"speed"`
+	Deg   int     `json:"deg"`
+	Gust  float64 `json:"gust"`
+}
+
+type Rain struct {
+	OneHour float64 `json:"1h"`
+}
+
+type Clouds struct {
+	All int `json:"all"`
+}
+
+type Sys struct {
+	Type    int    `json:"type"`
+	ID      int    `json:"id"`
+	Country string `json:"country"`
+	Sunrise int    `json:"sunrise"`
+	Sunset  int    `json:"sunset"`
 }
