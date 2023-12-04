@@ -2,14 +2,15 @@ package handlers
 
 import (
 	"fmt"
+	"log"
 )
 
 func SaveWeatherData(weatherData WeatherData) {
 
-	// db, err := GetDBConnection()
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
+	db, err := GetDBConnection()
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	//fmt.Printf("SaveWeatherData: %+v", weatherData)
 
@@ -37,37 +38,37 @@ func SaveWeatherData(weatherData WeatherData) {
 	precipTotal := weatherData.Observations[0].Metric.PrecipTotal
 	description := weatherData.Observations[0].Description
 
-	// defer db.Close()
+	defer db.Close()
 
-	// _, err = db.Exec("INSERT INTO public.ecowitt_weather(obsTimeUtc,obsTimeLocal,neighborhood,country,solarRadiation,lon,realtimeFrequency,epoch,lat,uv,winddir,humidity,qcStatus,temp,heatIndex,dewpt,windChill,windSpeed,windGust,pressure,precipRate,precipTotal) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22)",
-	// 	obsTimeUtc, obsTimeLocal, neighborhood, country, solarRadiation, lon, realtimeFrequency, epoch, lat, uv, winddir, humidity, qcStatus, temp, heatIndex, dewpt, windChill, windSpeed, windGust, pressure, precipRate, precipTotal)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
+	_, err = db.Exec("INSERT INTO public.ecowitt_weather(obsTimeUtc,obsTimeLocal,neighborhood,country,solarRadiation,lon,realtimeFrequency,epoch,lat,uv,winddir,humidity,qcStatus,temp,heatIndex,dewpt,windChill,windSpeed,windGust,pressure,precipRate,precipTotal,freetext) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23)",
+		obsTimeUtc, obsTimeLocal, neighborhood, country, solarRadiation, lon, realtimeFrequency, epoch, lat, uv, winddir, humidity, qcStatus, temp, heatIndex, dewpt, windChill, windSpeed, windGust, pressure, precipRate, precipTotal, description)
+	if err != nil {
+		log.Fatal("db.Exec ", err)
+	} else {
+		fmt.Println("\nData inserted successfully!")
+	}
 
-	fmt.Println("obsTimeUtc: ", obsTimeUtc)
-	fmt.Println("obsTimeLocal: ", obsTimeLocal)
-	fmt.Println("neighborhood: ", neighborhood)
-	fmt.Println("country: ", country)
-	fmt.Println("solarRadiation: ", solarRadiation)
-	fmt.Println("lon: ", lon)
-	fmt.Println("realtimeFrequency: ", realtimeFrequency)
-	fmt.Println("epoch: ", epoch)
-	fmt.Println("lat: ", lat)
-	fmt.Println("uv: ", uv)
-	fmt.Println("winddir: ", winddir)
-	fmt.Println("humidity: ", humidity)
-	fmt.Println("qcStatus: ", qcStatus)
-	fmt.Println("temp: ", temp)
-	fmt.Println("heatIndex: ", heatIndex)
-	fmt.Println("dewpt: ", dewpt)
-	fmt.Println("windChill: ", windChill)
-	fmt.Println("windSpeed: ", windSpeed)
-	fmt.Println("windGust: ", windGust)
-	fmt.Println("pressure: ", pressure)
-	fmt.Println("precipRate: ", precipRate)
-	fmt.Println("precipTotal: ", precipTotal)
-	fmt.Println("description: ", description)
-
-	fmt.Println("\nData inserted successfully!")
+	// fmt.Println("obsTimeUtc: ", obsTimeUtc)
+	// fmt.Println("obsTimeLocal: ", obsTimeLocal)
+	// fmt.Println("neighborhood: ", neighborhood)
+	// fmt.Println("country: ", country)
+	// fmt.Println("solarRadiation: ", solarRadiation)
+	// fmt.Println("lon: ", lon)
+	// fmt.Println("realtimeFrequency: ", realtimeFrequency)
+	// fmt.Println("epoch: ", epoch)
+	// fmt.Println("lat: ", lat)
+	// fmt.Println("uv: ", uv)
+	// fmt.Println("winddir: ", winddir)
+	// fmt.Println("humidity: ", humidity)
+	// fmt.Println("qcStatus: ", qcStatus)
+	// fmt.Println("temp: ", temp)
+	// fmt.Println("heatIndex: ", heatIndex)
+	// fmt.Println("dewpt: ", dewpt)
+	// fmt.Println("windChill: ", windChill)
+	// fmt.Println("windSpeed: ", windSpeed)
+	// fmt.Println("windGust: ", windGust)
+	// fmt.Println("pressure: ", pressure)
+	// fmt.Println("precipRate: ", precipRate)
+	// fmt.Println("precipTotal: ", precipTotal)
+	// fmt.Println("description: ", description)
 }

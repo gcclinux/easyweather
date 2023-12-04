@@ -34,20 +34,15 @@ func DownloadWeather() {
 	}
 
 	if StationValid && WundergroundApi != "invalid" && StationId != "invalid" && OpenWeatherApi != "invalid" {
-		valid, error, weatherData := getWunderground()
+		valid, _, weatherData := getWunderground()
 		if !valid {
-			valid, error, weatherData = getOpenWeather()
+			valid, _, weatherData = getOpenWeather()
 			if !valid {
 				fmt.Println("### Failed to collect weather! ###")
-				fmt.Println(error)
 			} else {
-				fmt.Printf("%s ", error)
-				fmt.Println("Ready to upload")
 				SaveWeatherData(weatherData)
 			}
 		} else {
-			fmt.Printf("%s ", error)
-			fmt.Println("Ready to upload")
 			SaveWeatherData(weatherData)
 		}
 	} else if OpenWeatherApi != "invalid" {
@@ -56,8 +51,6 @@ func DownloadWeather() {
 			fmt.Println("### Failed to collect OpenWeather! ###")
 			fmt.Println(error)
 		} else {
-			fmt.Printf("%s ", error)
-			fmt.Println("Ready to upload")
 			SaveWeatherData(weatherData)
 		}
 	} else {
