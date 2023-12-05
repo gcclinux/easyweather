@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"log"
 )
 
@@ -10,6 +11,8 @@ func SaveWeatherData(weatherData WeatherData) {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	config := GetConfig()
 
 	//fmt.Printf("SaveWeatherData: %+v", weatherData)
 
@@ -39,11 +42,15 @@ func SaveWeatherData(weatherData WeatherData) {
 
 	defer db.Close()
 
-	_, err = db.Exec("INSERT INTO public.ecowitt_weather(obsTimeUtc,obsTimeLocal,neighborhood,country,solarRadiation,lon,realtimeFrequency,epoch,lat,uv,winddir,humidity,qcStatus,temp,heatIndex,dewpt,windChill,windSpeed,windGust,pressure,precipRate,precipTotal,freetext) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23)",
-		obsTimeUtc, obsTimeLocal, neighborhood, country, solarRadiation, lon, realtimeFrequency, epoch, lat, uv, winddir, humidity, qcStatus, temp, heatIndex, dewpt, windChill, windSpeed, windGust, pressure, precipRate, precipTotal, description)
+	query := fmt.Sprintf("INSERT INTO public.%s(obsTimeUtc,obsTimeLocal,neighborhood,country,solarRadiation,lon,realtimeFrequency,epoch,lat,uv,winddir,humidity,qcStatus,temp,heatIndex,dewpt,windChill,windSpeed,windGust,pressure,precipRate,precipTotal,freetext) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23)",
+		config.TB_NAME[0])
+
+	_, err = db.Exec(query, obsTimeUtc, obsTimeLocal, neighborhood, country, solarRadiation, lon, realtimeFrequency, epoch, lat, uv, winddir, humidity, qcStatus, temp, heatIndex, dewpt, windChill, windSpeed, windGust, pressure, precipRate, precipTotal, description)
 	if err != nil {
 		log.Fatal("db.Exec ", err)
 	}
+
+	fmt.Println("Data saved!")
 
 	// fmt.Println("obsTimeUtc: ", obsTimeUtc)
 	// fmt.Println("obsTimeLocal: ", obsTimeLocal)

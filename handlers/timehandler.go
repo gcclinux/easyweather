@@ -9,8 +9,6 @@ func ConvertSeconds(unixSeconds int64) string {
 }
 
 func ConvertTime(unixSeconds int64) time.Time {
-
 	t := time.Unix(unixSeconds, 0)
-
 	return t
 }
