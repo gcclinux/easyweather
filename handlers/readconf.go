@@ -24,6 +24,7 @@ GetConfig() returns all the conf.json values
 	WebPort         []string `json:"WebPort"`
 	Language        []string `json:"Language"`
 	DefaultCity     []string `json:"DefaultCity"`
+	Interval        []int    `json:"Interval"`
 	}
 */
 func GetConfig() Config {

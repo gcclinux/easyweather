@@ -21,25 +21,25 @@ obsTimeUtc			obsTimeUtc(timestamp)		time.Time	Convert			2023-12-04T10:03:24Z
 obsTimeLocal		obsTimeLocal(timestamp)		string		Convert			2023-12-04 10:03:24
 neighborhood		neighborhood(character)		string		name			Edinburgh
 country				country(character)			string		country			GB
-solarRadiation		solarRadiation(double)		float64						8.6	
+solarRadiation		solarRadiation(double)		float64		0				8.6	
 lon					lon(double)					float64		lon				-3.456
-realtimeFrequency	realtimeFrequency(double)	int				
+realtimeFrequency	realtimeFrequency(double)	int			0				0
 epoch				epoch(double)				int			dt				1701684204
 lat					lat(double)					float64		lat				55.932
-uv					uv(double)					float64						0	
-winddir				winddir(integer)			float64						118	
+uv					uv(double)					float64		0				0	
+winddir				winddir(integer)			float64		0				118	
 humidity			humidity(integer)			float64		humidity		93
-qcStatus			qcStatus(integer)			float64						1	
+qcStatus			qcStatus(integer)			float64		0				1	
 temp				temp(double)				float64		temp			3.6
 heatIndex			heatIndex(double)			float64		feels_like		3.6
 dewpt				dewpt(double)				float64		Convert			2.5
-windChill			windChill(double)			float64						3.7
+windChill			windChill(double)			float64		0				3.7
 windSpeed			windSpeed(double)			float64		speed			1.1
 windGust			windGust(double)			float64		gust			1.8
 pressure			pressure(double)			float64		pressure		1020.79
-precipRate			precipRate(double)			float64						0	
-precipTotal			precipTotal(double)			float64						0.71	
-					freetext(character)			string		description		broken clouds
+precipRate			precipRate(double)			float64		0				0	
+precipTotal			precipTotal(double)			float64		0				0.71	
+0					freetext(character)			string		description		broken clouds
 ```
 **Config example if you upload data to weather.com then StationValid = true**
 ```
@@ -59,7 +59,8 @@ precipTotal			precipTotal(double)			float64						0.71
     "DefaultCity": ["Edinburgh"],								(Default city if not varble passed)
 	"EcowittKey": [""],											(Ecowitt Application key)
     "EcowittApi": [""],											(Ecowitt API key)
-    "EcowittMac": [""]											(Ecowitt Device MacAddress)
+    "EcowittMac": [""],											(Ecowitt Device MacAddress)
+	"Interval": [10]											(Freequency data will be collected in minutes)
 }
 ```
 **PostgreSQL database structure example and syntax**

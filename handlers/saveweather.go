@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"log"
 )
 
@@ -44,8 +43,6 @@ func SaveWeatherData(weatherData WeatherData) {
 		obsTimeUtc, obsTimeLocal, neighborhood, country, solarRadiation, lon, realtimeFrequency, epoch, lat, uv, winddir, humidity, qcStatus, temp, heatIndex, dewpt, windChill, windSpeed, windGust, pressure, precipRate, precipTotal, description)
 	if err != nil {
 		log.Fatal("db.Exec ", err)
-	} else {
-		fmt.Println("\nData inserted successfully!")
 	}
 
 	// fmt.Println("obsTimeUtc: ", obsTimeUtc)
@@ -71,4 +68,5 @@ func SaveWeatherData(weatherData WeatherData) {
 	// fmt.Println("precipRate: ", precipRate)
 	// fmt.Println("precipTotal: ", precipTotal)
 	// fmt.Println("description: ", description)
+	// fmt.Println("")
 }

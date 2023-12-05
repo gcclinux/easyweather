@@ -14,5 +14,6 @@
     "DefaultCity": ["Edinburgh"],
     "EcowittKey": [""],
     "EcowittApi": [""],
-    "EcowittMac": [""]
+    "EcowittMac": [""],
+    "Interval": [10]
 }

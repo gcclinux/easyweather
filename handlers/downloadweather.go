@@ -36,9 +36,10 @@ func DownloadWeather() {
 	if StationValid && WundergroundApi != "invalid" && StationId != "invalid" && OpenWeatherApi != "invalid" {
 		valid, _, weatherData := getWunderground()
 		if !valid {
+			fmt.Println("### Failed to collect weather from Wunderground! ###")
 			valid, _, weatherData = getOpenWeather()
 			if !valid {
-				fmt.Println("### Failed to collect weather! ###")
+				fmt.Println("### Failed to collect weather from OpenWeather! ###")
 			} else {
 				SaveWeatherData(weatherData)
 			}
@@ -48,7 +49,7 @@ func DownloadWeather() {
 	} else if OpenWeatherApi != "invalid" {
 		valid, error, weatherData := getOpenWeather()
 		if !valid {
-			fmt.Println("### Failed to collect OpenWeather! ###")
+			fmt.Println("### Failed to collect weather from OpenWeather! ###")
 			fmt.Println(error)
 		} else {
 			SaveWeatherData(weatherData)
@@ -97,7 +98,7 @@ func getOpenWeather() (bool, string, WeatherData) {
 	}
 
 	var weatherData WeatherData
-	weatherData.Observations = make([]Observation, 23)
+	weatherData.Observations = make([]Observation, 1)
 
 	if status {
 		TimeUtc := ConvertSeconds(int64(openweatherData.Dt))
@@ -180,6 +181,10 @@ func getWunderground() (bool, string, WeatherData) {
 			error = fmt.Sprintf("Error: WundergroundApi decoding JSON: %s\n", err)
 			status = false
 		}
+	}
+
+	if weatherData.Observations[0].Humidity == 0 && weatherData.Observations[0].Metric.Dewpt == 0 {
+		status = false
 	}
 
 	if error == "" {

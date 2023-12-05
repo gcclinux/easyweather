@@ -17,6 +17,7 @@ type Config struct {
 	WebPort         []string `json:"WebPort"`
 	Language        []string `json:"Language"`
 	DefaultCity     []string `json:"DefaultCity"`
+	Interval        []int    `json:"Interval"`
 }
 
 // Metric represents the nested "metric" object in the JSON structure

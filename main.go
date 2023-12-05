@@ -6,7 +6,7 @@ import (
 
 func main() {
 
-	handlers.GetDBConnection()
-	handlers.DownloadWeather()
+	//handlers.DownloadWeather()
+	handlers.CollectLoop()
 
 }
