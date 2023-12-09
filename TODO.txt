@@ -1,0 +1,2 @@
+* Check integraty of the json file
+* GetWeatherData() needs to dislay data for city in config file query := fmt.Sprintf
