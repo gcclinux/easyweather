@@ -8,7 +8,7 @@
     "OpenWeatherApi": ["12345678909876543212345678909876"],
     "StationValid": [false],
     "WundergroupApi": [""],
-	"StationId": [""],
+    "StationId": [""],
     "WebPort": ["8081"],
     "Language": ["en"],
     "DefaultCity": ["Edinburgh"],

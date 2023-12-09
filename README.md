@@ -101,5 +101,5 @@ When everything is created and configured like your PostgreSQL database and your
 **Quick example how to compile and lanch the application for data collection**<BR>
 *./compile.sh && ./easyweather.exe --collect*<BR>
 
-**Quick example how to compile and lanch the application to launch the web interface**<BR>
+**Quick example how to compile and lanch the application to launch the web interface!**<BR>
 *./compile.sh && ./easyweather.exe --web*<BR>
