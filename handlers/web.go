@@ -10,9 +10,7 @@ import (
 )
 
 func LaunchWeb() {
-	//var address = fmt.Sprintf("%s:%s", GetOutboundIP(), GetConfig().WebPort[0])
-
-	var address = "192.168.1.131:8081"
+	var address = fmt.Sprintf("%s:%s", GetOutboundIP(), GetConfig().WebPort[0])
 
 	// Define the endpoint
 	http.HandleFunc("/json", JsonHandler)
