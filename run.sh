@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-go build -o collect.exe *.go && ./collect.exe
+go build -o easyweather.exe *.go && ./easyweather.exe

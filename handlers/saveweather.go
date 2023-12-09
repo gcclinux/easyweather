@@ -50,7 +50,7 @@ func SaveWeatherData(weatherData WeatherData) {
 		log.Fatal("db.Exec ", err)
 	}
 
-	fmt.Println("Data saved!")
+	fmt.Println("Data saved: ", description)
 
 	// fmt.Println("obsTimeUtc: ", obsTimeUtc)
 	// fmt.Println("obsTimeLocal: ", obsTimeLocal)
