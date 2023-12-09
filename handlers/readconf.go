@@ -30,6 +30,7 @@ GetConfig() returns all the conf.json values
 func GetConfig() Config {
 	pwd, _ := filepath.Abs(filepath.Dir(os.Args[0]))
 	filePath := "/conf/conf.json"
+
 	file, err := os.Open(pwd + filePath)
 	if err != nil {
 		fmt.Println("file error:", err)

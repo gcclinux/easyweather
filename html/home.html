@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* {
+  box-sizing: border-box;
+}
+.menu {
+  margin-top: 7px;
+  background-color: gray;
+  float: left;
+  width: 20%;
+
+}
+.menuitem {
+  padding: 8px;
+  border-bottom: 1px solid #f1f1f1;
+}
+.main {
+  float: left;
+  width: 60%;
+  padding: 0 20px;
+  overflow: hidden;
+}
+.right {
+  background-color: gray;
+  float: left;
+  width: 20%;
+  padding: 10px 15px;
+  margin-top: 7px;
+}
+
+@media only screen and (max-width:800px) {
+  /* For tablets: */
+  .main {
+    width: 80%;
+    padding: 0;
+  }
+  .right {
+    width: 100%;
+  }
+}
+@media only screen and (max-width:500px) {
+  /* For mobile phones: */
+  .menu, .main, .right {
+    width: 100%;
+  }
+}
+
+.rounded {
+  border: 2px solid black;
+  border-radius: 25px;
+  padding: 20px;
+}
+
+</style>
+<meta charset="UTF-8">
+<title>Personal Weather Chart</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"></script>
+</head>
+<body style="font-family:Verdana;">
+
+<div class="rounded" style="background-color:#f1f1f1;padding:15px;">
+  <h1 style="font-size:250%;text-align:center;font-family:candara;font-weight: bolder;">Weather Station</h1>
+</div>
+
+<div style="overflow:auto">
+  <div class="menu rounded">
+    <p style="margin: 0;text-align:center;font-family:candara; color:rgb(0, 0, 0); font-size:180%;"><B>{{.Neighborhood}}</B></p>
+    <p style="margin: 0;text-align:center;font-family:candara; color:white; font-size:150%;">{{.Time}}</p>
+    <BR>
+    <table>
+        <tr>
+            <td style="width:100%;font-size:80%;">Temperature</td>
+          </tr> 
+          <tr>
+            <td style="width:100%;font-size:150%;color:white;">{{.Temp}} ℃</td>
+        </tr> 
+        <tr>
+
+            <td style="width:100%;font-size:80%;">Humidity</td>
+          </tr> 
+          <tr>
+            <td style="width:100%;font-size:150%;color:white;">{{.Humidity}} %</td>
+        </tr> 
+        <tr>
+          <td style="width:100%;font-size:80%;">Dew Point</td>
+        </tr> 
+        <tr>
+          <td style="width:100%;font-size:150%;color:white;">{{.Dewpt}} ℃</td>
+      </tr> 
+      <tr>
+          
+          <td style="width:100%;font-size:80%;">Wind Speed</td>
+        </tr> 
+        <tr>
+          <td style="width:100%;font-size:150%;color:white;">{{.Windspeed}} km/h</td>
+      </tr>
+      <tr>
+        <td style="width:100%;font-size:80%;">Pressure</td>
+    </tr> 
+    <tr>
+      <td style="width:100%;font-size:150%;color:white;">{{.Pressure}} hPa</td>
+  </tr> 
+    </table>
+  </div>
+
+  <div class="main">
+    <canvas id="mainChart" width="400" height="200">
+      Test
+        <script src="js/chart.js"></script>
+    </canvas>
+    <canvas id="myChart2" width="400" height="200">
+      Test
+        <script src="js/chart.js"></script>
+    </canvas>
+</div>
+
+  <div class="right rounded">
+    <p style="margin: 0;text-align:center;font-family:candara; color:rgb(0, 0, 0); font-size:180%;"><B>Lowest Today</B></p>
+    <BR>
+    <p style="margin: 0%; font-family:candara; width:70%;font-size:100%;">Date</p>
+    <p style="margin: 0%; font-family:candara; font-size:130%;font-family:courier;color: white;"><B>{{.Date}}</B></p>
+    <p style="margin: 0%; font-family:candara; width:70%;font-size:100%;">Time</p>
+    <p style="margin: 0%; font-family:candara; font-size:130%;font-family:courier;color: white;"><B>{{.PreWhen}}</B></p>
+    <p style="width:70%;font-size:80%;">Lowest Temperature</p>
+    <p style="width:75%;font-size:130%;color:white;">{{.PreLow}} ℃ </p>
+    <p style="width:70%;font-size:80%;">Dew point</p>
+    <p style="width:75%;font-size:130%;color:white;">{{.PreDewpt}} ℃ </p>
+    <p style="width:70%;font-size:80%;">Humidity</p>
+    <p style="width:75%;font-size:130%;color:white;">{{.PreHumidity}} % </p>
+    <p style="width:70%;font-size:80%;">Pressure</p>
+    <p style="width:75%;font-size:130%;color:white;">{{.PrePressure}} hPa </p> 
+    <p style="width:70%;font-size:80%;">Wind Speed</p>
+    <p style="width:75%;font-size:130%;color:white;">{{.PreWindspeed}} km/h </p> 
+  </div>
+</div>
+
+
+<div class="rounded" style="background-color:#f1f1f1;text-align:center;padding:10px;margin-top:7px;font-size:12px;"> Copyright 2023 - Ricardo Wagemaker</div>
+
+</body>
+</html>

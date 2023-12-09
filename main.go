@@ -17,6 +17,8 @@ func main() {
 		displayMenu()
 	} else if argument == 2 && os.Args[1] == "--collect" {
 		handlers.CollectLoop()
+	} else if argument == 2 && os.Args[1] == "--web" {
+		handlers.LaunchWeb()
 	} else {
 		displayMenu()
 	}
@@ -33,4 +35,6 @@ func displayMenu() {
 	fmt.Print("$ ", ex, " --help\n\n")
 	fmt.Println("# Start Collecting weather in the backgound!")
 	fmt.Print("$ ", ex, " --collect\n\n")
+	fmt.Println("# Launch the web service to open Weather Page!")
+	fmt.Print("$ ", ex, " --web\n\n")
 }

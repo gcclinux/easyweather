@@ -53,6 +53,10 @@ type Observation struct {
 	QCStatus          float64   `json:"qcStatus"`
 	Metric            Metric    `json:"metric"`
 	Description       string    `json:"description"`
+	PreWhen           string    `json:"prewhen"`
+	PreHumidity       float64   `json:"prehumidity"`
+	PreDewpt          float64   `json:"predewpt"`
+	PrePressure       float64   `json:"prepressure"`
 }
 
 // WeatherData represents the overall JSON structure
@@ -120,4 +124,25 @@ type Sys struct {
 	Country string `json:"country"`
 	Sunrise int    `json:"sunrise"`
 	Sunset  int    `json:"sunset"`
+}
+
+type WeatherStruct struct {
+	Obstimelocal string
+	Neighborhood string
+	Winddir      float64
+	Humidity     float64
+	Temp         float64
+	Dewpt        float64
+	Windchill    float64
+	Windspeed    float64
+	Pressure     float64
+	Max          float64
+	PreLow       string
+	PreWhen      string
+	Date         string
+	Time         string
+	PreHumidity  float64
+	PreDewpt     float64
+	PrePressure  float64
+	PreWindspeed float64
 }
