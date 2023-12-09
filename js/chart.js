@@ -89,7 +89,7 @@ fetch(url)
                     label: 'Wind Speed',
                     borderWidth: 1,
                     data: windData,
-                    borderColor: 'rgba(255, 119, 51, 1)',
+                    borderColor: 'rgba(255, 119, 52, 1)',
                     backgroundColor: 'rgba(255, 153, 102, 0.2)',
                     fill: true,
                     tension: 0.1,
