@@ -32,26 +32,26 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	MinT := math.Inf(0)
 
 	for _, data := range weatherData {
-		temperature = data.Observations[0].Metric.Temp
-		humidity = data.Observations[0].Humidity
-		Location = data.Observations[0].Neighborhood
-		date = data.Observations[0].ObsTimeLocal[:10]
-		time = data.Observations[0].ObsTimeLocal[11:19]
-		windspeed = data.Observations[0].Metric.WindSpeed
-		dewpt = data.Observations[0].Metric.Dewpt
-		pressure = data.Observations[0].Metric.Pressure
-		if data.Observations[0].Metric.Temp < MinT {
-			MinT = data.Observations[0].Metric.Temp
+		temperature = data.Temp
+		humidity = data.Humidity
+		Location = data.Neighborhood
+		date = data.Obstimelocal[:10]
+		time = data.Obstimelocal[11:19]
+		windspeed = data.WindSpeed
+		dewpt = data.Dewpt
+		pressure = data.Pressure
+		if data.Temp < MinT {
+			MinT = data.Temp
 		}
 	}
 
 	for _, dt := range weatherData {
-		if MinT == dt.Observations[0].Metric.Temp {
-			Minwhen = dt.Observations[0].ObsTimeLocal[11:19]
-			preHumidity = dt.Observations[0].Humidity
-			preDewpt = dt.Observations[0].Metric.Dewpt
-			prePressure = dt.Observations[0].Metric.Pressure
-			preWindspeed = dt.Observations[0].Metric.WindSpeed
+		if MinT == dt.Temp {
+			Minwhen = dt.Obstimelocal[11:19]
+			preHumidity = dt.Humidity
+			preDewpt = dt.Dewpt
+			prePressure = dt.Pressure
+			preWindspeed = dt.WindSpeed
 		}
 	}
 
@@ -75,7 +75,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		PrePressure:  prePressure,
 		Dewpt:        dewpt,
 		PreWindspeed: preWindspeed,
-		Windspeed:    windspeed,
+		WindSpeed:    windspeed,
 		Pressure:     pressure,
 		Time:         time,
 	}

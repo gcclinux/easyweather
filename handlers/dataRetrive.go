@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-func GetWeatherData() []WeatherData {
+func GetWeatherData() []WeatherStruct {
 
 	db, err := GetDBConnection()
 	if err != nil {
@@ -17,18 +17,17 @@ func GetWeatherData() []WeatherData {
 	if err != nil {
 		log.Fatal(err)
 		fmt.Println("GetWeatherData FAILED")
-	} else {
-		fmt.Println("GetWeatherData OK")
 	}
+
 	defer rows.Close()
 
 	// Slice to store WeatherData objects
-	var weatherDataSlice []WeatherData
+	var weatherDataSlice []WeatherStruct
 
 	// Loop through the result set
 	for rows.Next() {
-		var weatherData WeatherData
-		err := rows.Scan(&weatherData.Observations[0].ObsTimeLocal, &weatherData.Observations[0].Neighborhood, &weatherData.Observations[0].Winddir, &weatherData.Observations[0].Humidity, &weatherData.Observations[0].Metric.Temp, &weatherData.Observations[0].Metric.Dewpt, &weatherData.Observations[0].Metric.WindChill, &weatherData.Observations[0].Metric.WindSpeed, &weatherData.Observations[0].Metric.Pressure)
+		var weatherData WeatherStruct
+		err := rows.Scan(&weatherData.Obstimelocal, &weatherData.Neighborhood, &weatherData.Winddir, &weatherData.Humidity, &weatherData.Temp, &weatherData.Dewpt, &weatherData.WindChill, &weatherData.WindSpeed, &weatherData.Pressure)
 		if err != nil {
 			log.Fatal(err)
 		}

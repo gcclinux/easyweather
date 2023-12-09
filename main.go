@@ -33,8 +33,8 @@ func displayMenu() {
 	fmt.Println()
 	fmt.Println("# Display the Help Menu")
 	fmt.Print("$ ", ex, " --help\n\n")
-	fmt.Println("# Start Collecting weather in the backgound!")
-	fmt.Print("$ ", ex, " --collect\n\n")
 	fmt.Println("# Launch the web service to open Weather Page!")
 	fmt.Print("$ ", ex, " --web\n\n")
+	fmt.Println("# Start collecting weather and put it in background!")
+	fmt.Print("$ ", ex, " --collect\n\n")
 }

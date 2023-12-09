@@ -133,8 +133,8 @@ type WeatherStruct struct {
 	Humidity     float64
 	Temp         float64
 	Dewpt        float64
-	Windchill    float64
-	Windspeed    float64
+	WindChill    float64
+	WindSpeed    float64
 	Pressure     float64
 	Max          float64
 	PreLow       string
