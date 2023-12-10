@@ -1,6 +1,5 @@
-* Check integraty of the json file
-* Create a full integraty, config, connection, db structure test
-* GetWeatherData() needs to dislay data for city in config file query := fmt.Sprintf
+
 * Add more guidance on running in the background
 * Create an admin page to help configure the conf.json file through web
 * Add security check (API key) to /json URL for personal use only
+* --web Windspeed and WindChil chart.js needs fixing
