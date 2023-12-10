@@ -106,3 +106,6 @@ When everything is created and configured like your PostgreSQL database and your
 
 **Quick example how to compile and lanch the application to launch the web interface!**<BR>
 *./compile.sh && ./easyweather.exe --web*<BR>
+
+**Function to run through the setup and check the integrity of the application setup**<BR>
+*./compile.sh && ./easyweather.exe --integrity*<BR>
