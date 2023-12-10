@@ -18,6 +18,9 @@ type Config struct {
 	Language        []string `json:"Language"`
 	DefaultCity     []string `json:"DefaultCity"`
 	Interval        []int    `json:"Interval"`
+	EcowittKey      []string `json:"EcowittKey"`
+	EcowittApi      []string `json:"EcowittApi"`
+	EcowittMac      []string `json:"EcowittMac"`
 }
 
 // Metric represents the nested "metric" object in the JSON structure

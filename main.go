@@ -19,6 +19,8 @@ func main() {
 		handlers.CollectLoop()
 	} else if argument == 2 && os.Args[1] == "--web" {
 		handlers.LaunchWeb()
+	} else if argument == 2 && os.Args[1] == "--integrity" {
+		fmt.Println(handlers.SetupIntegraty())
 	} else {
 		displayMenu()
 	}
@@ -37,4 +39,6 @@ func displayMenu() {
 	fmt.Print("$ ", ex, " --web\n\n")
 	fmt.Println("# Start collecting weather and put it in background!")
 	fmt.Print("$ ", ex, " --collect\n\n")
+	fmt.Println("# Run a Setup integraty check before starting or in case of errors!")
+	fmt.Print("$ ", ex, " --integrity\n\n")
 }
