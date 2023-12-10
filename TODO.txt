@@ -1,2 +1,3 @@
 * Check integraty of the json file
+* Create a full integraty, config, connection, db structure test
 * GetWeatherData() needs to dislay data for city in config file query := fmt.Sprintf
