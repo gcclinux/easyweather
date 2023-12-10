@@ -25,7 +25,7 @@ func JsonHandler(w http.ResponseWriter, r *http.Request) {
 			weatherData[dt].PreHumidity = weatherData[dt].Humidity
 			weatherData[dt].PreDewpt = weatherData[dt].Dewpt
 			weatherData[dt].PrePressure = weatherData[dt].Pressure
-			weatherData[dt].PrePressure = weatherData[dt].WindSpeed
+			weatherData[dt].PreWindspeed = weatherData[dt].WindSpeed
 		}
 	}
 
