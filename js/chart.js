@@ -12,8 +12,8 @@ fetch(url)
             labels.push(data[i].Obstimelocal);
             tempData.push(data[i].Temp);
             dewpt.push(data[i].Dewpt);
-            windData.push(data[i].Windspeed);
-            windchill.push(data[i].Windchill);
+            windData.push(data[i].WindSpeed);
+            windchill.push(data[i].WindChill);
         }
 
         var ctx = document.getElementById('mainChart').getContext('2d');

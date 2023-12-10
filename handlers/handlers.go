@@ -28,12 +28,12 @@ type Metric struct {
 	Temp        float64 `json:"temp"`
 	HeatIndex   float64 `json:"heatIndex"`
 	Dewpt       float64 `json:"dewpt"`
-	WindChill   float64 `json:"windChill"`
-	WindSpeed   float64 `json:"windSpeed"`
-	WindGust    float64 `json:"windGust"`
+	WindChill   float64 `json:"windchill"`
+	WindSpeed   float64 `json:"windspeed"`
+	WindGust    float64 `json:"windgust"`
 	Pressure    float64 `json:"pressure"`
-	PrecipRate  float64 `json:"precipRate"`
-	PrecipTotal float64 `json:"precipTotal"`
+	PrecipRate  float64 `json:"preciprate"`
+	PrecipTotal float64 `json:"preciptotal"`
 	Elev        float64 `json:"elev"`
 }
 

@@ -12,13 +12,15 @@ func GetWeatherData() []WeatherStruct {
 		log.Fatal(err)
 	}
 
-	// Query the database
-	rows, err := db.Query("SELECT obstimelocal, neighborhood, winddir, humidity, temp, dewpt, windchill, windspeed, pressure FROM ecowitt_weather WHERE ecowitt_weather.obstimelocal >= CURRENT_DATE AND ecowitt_weather.obstimelocal < (CURRENT_DATE + '1 day'::interval) ORDER BY ecowitt_weather.id ASC; ")
-	if err != nil {
-		log.Fatal(err)
-		fmt.Println("GetWeatherData FAILED")
-	}
+	config := GetConfig()
+	query := fmt.Sprintf("SELECT mt.obstimelocal, mt.neighborhood, mt.winddir, mt.humidity, mt.temp, mt.dewpt, mt.windchill, mt.windspeed, mt.pressure FROM %s AS mt WHERE mt.obstimelocal >= CURRENT_DATE AND mt.obstimelocal < (CURRENT_DATE + '1 day'::interval) ORDER BY mt.id ASC;", config.TB_NAME[0])
 
+	// Execute the query
+	rows, err := db.Query(query)
+	if err != nil {
+		fmt.Println("GetWeatherData FAILED")
+		log.Fatal(err)
+	}
 	defer rows.Close()
 
 	// Slice to store WeatherData objects

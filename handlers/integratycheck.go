@@ -1,9 +1,15 @@
 package handlers
 
 import (
+	"database/sql"
 	"encoding/json"
+	"net"
 	"os"
 	"path/filepath"
+	"strconv"
+	"time"
+
+	_ "github.com/lib/pq"
 )
 
 func SetupIntegraty() string {
@@ -114,6 +120,65 @@ func SetupIntegraty() string {
 			msg += "\n>> Reading TB_NAME hasValue! Status OK"
 			status = true
 		}
+
+		db, _ := GetDBConnection()
+		err = db.Ping()
+		if err != nil {
+			msg += "\n>> Checking Database Connection! Status Failed"
+			status = false
+			break
+		} else {
+			msg += "\n>> Checking Database Connection! Status OK"
+			status = false
+		}
+
+		tableName := config.TB_NAME[0]
+		expectedColumns := []string{
+			"id", "obstimeutc", "obstimelocal", "neighborhood", "country", "solarradiation",
+			"lon", "realtimefrequency", "epoch", "lat", "uv", "winddir", "humidity", "qcstatus",
+			"temp", "heatindex", "dewpt", "windchill", "windspeed", "windgust", "pressure", "preciprate",
+			"preciptotal", "created_at", "freetext",
+		}
+
+		defer db.Close()
+		exists, err := columnsExist(db, tableName, expectedColumns)
+		if err != nil {
+			msg += "\n>> Reading Tables & Columns! Status Failed"
+			status = false
+			break
+		}
+
+		if exists {
+			msg += "\n>> All Table & Columns exists! Status OK"
+			status = true
+		} else {
+			msg += "\n>> Reading Tables & Columns! Status Failed"
+			status = false
+			break
+		}
+
+		if isEmpty(config.WebPort[0]) || !isNumeric(config.WebPort[0]) {
+			msg += "\n>> WebPort has no Valid Port! Status Failed"
+			status = false
+			break
+		} else {
+			msg += "\n>> Reading WebPort hasValue! Status OK"
+			status = true
+		}
+
+		timeout := time.Second
+		host := GetOutboundIP()
+		conn, err := net.DialTimeout("tcp", net.JoinHostPort(host.String(), config.WebPort[0]), timeout)
+		if err != nil {
+			msg += "\n>> Tested WebPort isOpen! Status OK"
+			status = true
+		} else {
+			defer conn.Close()
+			msg += "\n>> WebPort has no Valid Port! Status Failed"
+			status = false
+			break
+		}
+
 		if config.OpenWeatherApi[0] == "" && config.WundergroundApi[0] == "" && config.EcowittApi[0] == "" {
 			msg += "\n>> All API key configured isEmpty! Status Failed"
 			status = false
@@ -174,6 +239,7 @@ func SetupIntegraty() string {
 		}
 
 		// End of checks
+		msg += "\n"
 		status = false
 	}
 
@@ -194,4 +260,48 @@ func isEmptyInt(i int) bool {
 
 func isValidBoolean(b bool) bool {
 	return true
+}
+
+func isNumeric(str string) bool {
+	_, err := strconv.Atoi(str)
+	return err == nil
+}
+
+func columnsExist(db *sql.DB, tableName string, expectedColumns []string) (bool, error) {
+	query := `
+		SELECT column_name
+		FROM information_schema.columns
+		WHERE table_name = $1
+	`
+	rows, err := db.Query(query, tableName)
+	if err != nil {
+		return false, err
+	}
+	defer rows.Close()
+
+	// Collect existing column names in a slice
+	existingColumns := make([]string, 0)
+	for rows.Next() {
+		var columnName string
+		if err := rows.Scan(&columnName); err != nil {
+			return false, err
+		}
+		existingColumns = append(existingColumns, columnName)
+	}
+
+	// Check if all expected columns exist in the table
+	for _, col := range expectedColumns {
+		found := false
+		for _, existingCol := range existingColumns {
+			if col == existingCol {
+				found = true
+				break
+			}
+		}
+		if !found {
+			return false, nil
+		}
+	}
+
+	return true, nil
 }
