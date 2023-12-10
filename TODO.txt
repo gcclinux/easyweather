@@ -3,3 +3,4 @@
 * Create an admin page to help configure the conf.json file through web
 * Add security check (API key) to /json URL for personal use only
 * --web Windspeed and WindChil chart.js needs fixing
+* Pulling data from Ecowitt yet to start, currently only Wunderground and OpenWeatherMap
