@@ -1,8 +1,11 @@
-# weatherAPI
+# EASYWEATHER
+
+This application / code is currently still working progress several know facts still to be corrected and completed.
+
 
 **New Weather collector that get weather data from weather.com and openweathermap.org**
 
-This weatherCollect application will collect the weather data from either or both above data source and store it in a PostgreSQL database.
+This easyweather application will collect the weather data from either or both above data source and store it in a PostgreSQL database.
 
 Requires: APIKEY from either or both Weather Sites
 
