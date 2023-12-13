@@ -6,14 +6,13 @@
     "DB_NAME": [""],
     "TB_NAME": [""],
     "OpenWeatherApi": [""],
-    "StationValid": [false],
     "WundergroundApi": [""],
     "StationId": [""],
     "WebPort": [""],
     "Language": ["en"],
     "DefaultCity": [""],
-    "EcowittKey": [""],
-    "EcowittApi": [""],
-    "EcowittMac": [""],
-    "Interval": [10]
+    "Interval": [10],
+    "Retry": [10],
+    "PrivKeyPATH": [""],
+    "CertPemPATH": [""]
 }

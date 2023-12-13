@@ -12,6 +12,8 @@ fetch(url)
             labels.push(data[i].Obstimelocal);
             tempData.push(data[i].Temp);
             dewpt.push(data[i].Dewpt);
+            windData.push(data[i].WindSpeed);
+            windchill.push(data[i].WindChill);
         }
 
         var ctx = document.getElementById('mainChart').getContext('2d');
@@ -68,16 +70,6 @@ fetch(url)
                   }
             }
         });
-    });
-
-    fetch(url)
-    .then(response => response.json())
-    .then(data2 => {
-        for (var i = 0; i < data2.length; i++) {
-            labels.push(data2[i].Obstimelocal);
-            windData.push(data2[i].WindSpeed);
-            windchill.push(data2[i].WindChill);
-        }
 
         var ctx2 = document.getElementById('windChart').getContext('2d');
         var windChart = new Chart(ctx2, {

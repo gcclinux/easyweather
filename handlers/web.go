@@ -27,7 +27,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 
 	weatherData := GetWeatherData()
 
-	temperature, humidity, preHumidity, preDewpt, prePressure, preWindspeed, windspeed, dewpt, pressure := 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
+	temperature, humidity, preHumidity, preDewpt, prePressure, preWindspeed, windspeed, dewpt, pressure, precipTotal := 00.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
 	var Location, Minwhen, mini, date, time = "", "", "", "", ""
 	MinT := math.Inf(0)
 
@@ -40,6 +40,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		windspeed = data.WindSpeed
 		dewpt = data.Dewpt
 		pressure = data.Pressure
+		precipTotal = data.PrecipTotal
 		if data.Temp < MinT {
 			MinT = data.Temp
 		}
@@ -78,6 +79,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		WindSpeed:    windspeed,
 		Pressure:     pressure,
 		Time:         time,
+		PrecipTotal:  precipTotal,
 	}
 
 	tmpl, err := template.ParseFiles("html/home.html")

@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+	"strings"
 	"time"
 
 	_ "github.com/lib/pq"
@@ -30,7 +31,7 @@ func SetupIntegraty() string {
 			status = false
 			break
 		} else {
-			msg += "\n>> Config File Present! Status OK"
+			msg += "\n>> Config File Present & accessible! Status OK"
 			status = true
 		}
 
@@ -53,15 +54,14 @@ func SetupIntegraty() string {
 			len(config.DB_NAME) == 1 &&
 			len(config.TB_NAME) == 1 &&
 			len(config.OpenWeatherApi) == 1 &&
-			len(config.StationValid) == 1 &&
 			len(config.WundergroundApi) == 1 &&
 			len(config.StationId) == 1 &&
 			len(config.WebPort) == 1 &&
 			len(config.Language) == 1 &&
 			len(config.DefaultCity) == 1 &&
-			len(config.EcowittKey) == 1 &&
-			len(config.EcowittApi) == 1 &&
-			len(config.EcowittMac) == 1 &&
+			len(config.PrivKeyPATH) == 1 &&
+			len(config.CertPemPATH) == 1 &&
+			len(config.Retry) == 1 &&
 			len(config.Interval) == 1 {
 			msg += "\n>> Reading Config integrity! Status OK"
 			status = true
@@ -77,7 +77,7 @@ func SetupIntegraty() string {
 			status = false
 			break
 		} else {
-			msg += "\n>> Reading DB_HOST hasValue! Status OK"
+			msg += "\n>> Reading DB_HOST hasValue! Status OK (" + config.DB_HOST[0] + ")"
 			status = true
 		}
 		if config.DB_PORT[0] == "" {
@@ -85,7 +85,7 @@ func SetupIntegraty() string {
 			status = false
 			break
 		} else {
-			msg += "\n>> Reading DB_PORT hasValue! Status OK"
+			msg += "\n>> Reading DB_PORT hasValue! Status OK (" + config.DB_PORT[0] + ")"
 			status = true
 		}
 		if config.DB_USER[0] == "" {
@@ -93,7 +93,7 @@ func SetupIntegraty() string {
 			status = false
 			break
 		} else {
-			msg += "\n>> Reading DB_USER hasValue! Status OK"
+			msg += "\n>> Reading DB_USER hasValue! Status OK (" + config.DB_USER[0] + ")"
 			status = true
 		}
 		if config.DB_PASS[0] == "" {
@@ -101,7 +101,7 @@ func SetupIntegraty() string {
 			status = false
 			break
 		} else {
-			msg += "\n>> Reading DB_PASS hasValue! Status OK"
+			msg += "\n>> Reading DB_PASS hasValue! Status OK (" + config.DB_PASS[0] + ")"
 			status = true
 		}
 		if config.DB_NAME[0] == "" {
@@ -109,7 +109,7 @@ func SetupIntegraty() string {
 			status = false
 			break
 		} else {
-			msg += "\n>> Reading DB_NAME hasValue! Status OK"
+			msg += "\n>> Reading DB_NAME hasValue! Status OK (" + config.DB_NAME[0] + ")"
 			status = true
 		}
 		if config.TB_NAME[0] == "" {
@@ -117,7 +117,7 @@ func SetupIntegraty() string {
 			status = false
 			break
 		} else {
-			msg += "\n>> Reading TB_NAME hasValue! Status OK"
+			msg += "\n>> Reading TB_NAME hasValue! Status OK (" + config.TB_NAME[0] + ")"
 			status = true
 		}
 
@@ -162,7 +162,7 @@ func SetupIntegraty() string {
 			status = false
 			break
 		} else {
-			msg += "\n>> Reading WebPort hasValue! Status OK"
+			msg += "\n>> Reading WebPort hasValue! Status OK (" + config.WebPort[0] + ")"
 			status = true
 		}
 
@@ -179,7 +179,7 @@ func SetupIntegraty() string {
 			break
 		}
 
-		if config.OpenWeatherApi[0] == "" && config.WundergroundApi[0] == "" && config.EcowittApi[0] == "" {
+		if config.OpenWeatherApi[0] == "" && config.WundergroundApi[0] == "" {
 			msg += "\n>> All API key configured isEmpty! Status Failed"
 			status = false
 			break
@@ -188,7 +188,7 @@ func SetupIntegraty() string {
 			status = true
 		}
 		if config.OpenWeatherApi[0] != "" && len(config.OpenWeatherApi[0]) == 32 {
-			msg += "\n>> OpenWeatherApi API key length! Status OK"
+			msg += "\n>> OpenWeatherApi API key length! Status OK  (" + config.OpenWeatherApi[0] + ")"
 			status = true
 		} else {
 			msg += "\n>> OpenWeatherApi API key length! Status Failed"
@@ -196,33 +196,15 @@ func SetupIntegraty() string {
 			break
 		}
 		if config.WundergroundApi[0] != "" && len(config.WundergroundApi[0]) == 32 {
-			msg += "\n>> WundergroundApi API key length! Status OK"
+			msg += "\n>> WundergroundApi API key length! Status OK  (" + config.WundergroundApi[0] + ")"
 			status = true
 		} else {
 			msg += "\n>> WundergroundApi API key length! Status Failed"
 			status = false
 			break
 		}
-		if config.EcowittApi[0] != "" && config.EcowittKey[0] == "" && config.EcowittMac[0] == "" ||
-			config.EcowittApi[0] == "" && config.EcowittKey[0] != "" && config.EcowittMac[0] == "" ||
-			config.EcowittApi[0] == "" && config.EcowittKey[0] == "" && config.EcowittMac[0] != "" {
-			msg += "\n>> Ecowitt API / KEY / OR MAC Missing! Status Failed"
-			status = false
-			break
-		} else {
-			msg += "\n>> Ecowitt API / KEY / MAC hasValue! Status OK"
-			status = true
-		}
-		if isValidBoolean(config.StationValid[0]) && !isEmptyBool(config.StationValid[0]) {
-			msg += "\n>> StationValid has booleanValue! Status OK"
-			status = true
-		} else {
-			msg += "\n>> StationValid NO booleanValue! Status Failed"
-			status = false
-			break
-		}
 		if !isEmptyInt(config.Interval[0]) {
-			msg += "\n>> Interval has IntegerValue! Status OK"
+			msg += "\n>> Interval has IntegerValue! Status OK (" + strconv.Itoa(config.Interval[0]) + " Minutes)"
 			status = true
 		} else {
 			msg += "\n>> Interval NO IntegerValue! Status Failed"
@@ -234,8 +216,50 @@ func SetupIntegraty() string {
 			status = false
 			break
 		} else {
-			msg += "\n>> DefaultCity has StringValue! Status OK"
+			msg += "\n>> DefaultCity has StringValue! Status OK (" + config.DefaultCity[0] + ")"
 			status = true
+		}
+
+		if isEmpty(config.CertPemPATH[0]) {
+			msg += "\n>> CertPemPATH is NOT configured SSL unavailable! Status Warning"
+			status = true
+		} else {
+			msg += "\n>> CertPemPATH has StringValue! Status OK"
+			status = true
+			if strings.HasSuffix(config.CertPemPATH[0], ".pem") {
+				msg += "\n>> CertPemPATH seems valid (pem)! Status OK (" + config.CertPemPATH[0] + ")"
+				status = true
+			} else {
+				msg += "\n>> CertPemPATH configured BUT invalid (pem)! Status Failed"
+				status = false
+				break
+			}
+		}
+
+		if isEmpty(config.PrivKeyPATH[0]) {
+			msg += "\n>> PrivKeyPATH is NOT configured SSL unavailable! Status Warning"
+			status = true
+			break
+		} else {
+			msg += "\n>> PrivKeyPATH has StringValue! Status OK"
+			status = true
+			if strings.HasSuffix(config.PrivKeyPATH[0], ".pem") {
+				msg += "\n>> PrivKeyPATH seems valid (pem)! Status OK (" + config.PrivKeyPATH[0] + ")"
+				status = true
+			} else {
+				msg += "\n>> PrivKeyPATH configured BUT invalid (pem)! Status Failed"
+				status = false
+				break
+			}
+		}
+
+		if !isEmptyInt(config.Retry[0]) {
+			msg += "\n>> Retry has IntegerValue! Status OK (" + strconv.Itoa(config.Retry[0]) + " Minutes)"
+			status = true
+		} else {
+			msg += "\n>> Retry NO IntegerValue! Status Failed"
+			status = false
+			break
 		}
 
 		// End of checks
@@ -250,16 +274,8 @@ func isEmpty(s string) bool {
 	return s == ""
 }
 
-func isEmptyBool(b bool) bool {
-	return false
-}
-
 func isEmptyInt(i int) bool {
 	return i == 0
-}
-
-func isValidBoolean(b bool) bool {
-	return true
 }
 
 func isNumeric(str string) bool {

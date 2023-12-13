@@ -13,7 +13,7 @@ func GetWeatherData() []WeatherStruct {
 	}
 
 	config := GetConfig()
-	query := fmt.Sprintf("SELECT mt.obstimelocal, mt.neighborhood, mt.winddir, mt.humidity, mt.temp, mt.dewpt, mt.windchill, mt.windspeed, mt.pressure FROM %s AS mt WHERE mt.obstimelocal >= CURRENT_DATE AND mt.obstimelocal < (CURRENT_DATE + '1 day'::interval) ORDER BY mt.id ASC;", config.TB_NAME[0])
+	query := fmt.Sprintf("SELECT mt.obstimelocal, mt.neighborhood, mt.winddir, mt.humidity, mt.temp, mt.dewpt, mt.windchill, mt.windspeed, mt.pressure, mt.preciptotal FROM %s AS mt WHERE mt.obstimelocal >= CURRENT_DATE AND mt.obstimelocal < (CURRENT_DATE + '1 day'::interval) ORDER BY mt.id ASC;", config.TB_NAME[0])
 
 	// Execute the query
 	rows, err := db.Query(query)
@@ -29,7 +29,7 @@ func GetWeatherData() []WeatherStruct {
 	// Loop through the result set
 	for rows.Next() {
 		var weatherData WeatherStruct
-		err := rows.Scan(&weatherData.Obstimelocal, &weatherData.Neighborhood, &weatherData.Winddir, &weatherData.Humidity, &weatherData.Temp, &weatherData.Dewpt, &weatherData.WindChill, &weatherData.WindSpeed, &weatherData.Pressure)
+		err := rows.Scan(&weatherData.Obstimelocal, &weatherData.Neighborhood, &weatherData.Winddir, &weatherData.Humidity, &weatherData.Temp, &weatherData.Dewpt, &weatherData.WindChill, &weatherData.WindSpeed, &weatherData.Pressure, &weatherData.PrecipTotal)
 		if err != nil {
 			log.Fatal(err)
 		}

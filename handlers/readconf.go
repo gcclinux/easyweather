@@ -18,13 +18,15 @@ GetConfig() returns all the conf.json values
 	DB_NAME         []string `json:"DB_NAME"`
 	TB_NAME         []string `json:"TB_NAME"`
 	OpenWeatherApi  []string `json:"OpenWeatherApi"`
-	StationValid    []bool   `json:"StationValid"`
 	WundergroundApi []string `json:"WundergroundApi"`
 	StationId       []string `json:"StationId"`
 	WebPort         []string `json:"WebPort"`
 	Language        []string `json:"Language"`
 	DefaultCity     []string `json:"DefaultCity"`
 	Interval        []int    `json:"Interval"`
+	Retry 			[]int	 `json:"Retry"`
+    PrivKeyPATH     []string `json:"PrivKeyPATH"`
+    CertPemPATH     []string `json:"CertPemPATH"`
 	}
 */
 func GetConfig() Config {

@@ -99,6 +99,12 @@
           <td style="width:100%;font-size:150%;color:white;">{{.WindSpeed}} km/h</td>
       </tr>
       <tr>
+          <td style="width:100%;font-size:80%;">Total Rain Today</td>
+      </tr> 
+      <tr>
+        <td style="width:100%;font-size:150%;color:white;">{{.PrecipTotal}} mm</td>
+    </tr> 
+      <tr>
         <td style="width:100%;font-size:80%;">Pressure</td>
     </tr> 
     <tr>
@@ -124,16 +130,18 @@
     <p style="margin: 0%; font-family:candara; font-size:130%;font-family:courier;color: white;"><B>{{.Date}}</B></p>
     <p style="margin: 0%; font-family:candara; width:70%;font-size:100%;">Time</p>
     <p style="margin: 0%; font-family:candara; font-size:130%;font-family:courier;color: white;"><B>{{.PreWhen}}</B></p>
-    <p style="width:70%;font-size:80%;">Lowest Temperature</p>
-    <p style="width:75%;font-size:130%;color:white;">{{.PreLow}} ℃ </p>
-    <p style="width:70%;font-size:80%;">Dew point</p>
-    <p style="width:75%;font-size:130%;color:white;">{{.PreDewpt}} ℃ </p>
-    <p style="width:70%;font-size:80%;">Humidity</p>
-    <p style="width:75%;font-size:130%;color:white;">{{.PreHumidity}} % </p>
-    <p style="width:70%;font-size:80%;">Pressure</p>
-    <p style="width:75%;font-size:130%;color:white;">{{.PrePressure}} hPa </p> 
-    <p style="width:70%;font-size:80%;">Wind Speed</p>
-    <p style="width:75%;font-size:130%;color:white;">{{.PreWindspeed}} km/h </p> 
+    <p style="margin: 0%; margin-top: 5%; width:70%;font-size:80%;">Lowest Temperature</p>
+    <p style="margin: 0%; width:75%;font-size:130%;color:white;">{{.PreLow}} ℃ </p>
+    <p style="margin: 0%; width:70%;font-size:80%;">Dew point</p>
+    <p style="margin: 0%; width:75%;font-size:130%;color:white;">{{.PreDewpt}} ℃ </p>
+    <p style="margin: 0%; width:70%;font-size:80%;">Humidity</p>
+    <p style="margin: 0%; width:75%;font-size:130%;color:white;">{{.PreHumidity}} % </p>
+    <p style="margin: 0%; width:70%;font-size:80%;">Wind Speed</p>
+    <p style="margin: 0%; width:75%;font-size:130%;color:white;">{{.PreWindspeed}} km/h </p>
+    <p style="margin: 0%; width:70%;font-size:80%;">Total Rain</p>
+    <p style="margin: 0%; width:75%;font-size:130%;color:white;">{{.PrecipTotal}} mm </p> 
+    <p style="margin: 0%; width:70%;font-size:80%;">Pressure</p>
+    <p style="margin: 0%; width:75%;font-size:130%;color:white;">{{.PrePressure}} hPa </p> 
   </div>
 </div>
 
