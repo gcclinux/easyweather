@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"fmt"
+	"log"
 	"math"
 	"net/http"
 	"strconv"
@@ -18,17 +19,27 @@ func LaunchWeb() {
 
 	// Adding additional required directories
 	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("js"))))
-	fmt.Printf("Listening on http://%s\n", address)
 
-	http.ListenAndServe(address, nil)
+	if isEmpty(GetConfig().PrivKeyPATH[0]) || isEmpty(GetConfig().CertPemPATH[0]) {
+		fmt.Printf("Listening on http://%s\n", address)
+		http.ListenAndServe(address, nil)
+	} else {
+		fmt.Printf("Listening on https://%s:%s\n", GetSSLName(), GetConfig().WebPort[0])
+		err := http.ListenAndServeTLS(fmt.Sprintf("%v", address), GetConfig().CertPemPATH[0], GetConfig().PrivKeyPATH[0], nil)
+		if err != nil {
+			log.Println(err)
+		}
+
+	}
+
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 
 	weatherData := GetWeatherData()
 
-	temperature, humidity, preHumidity, preDewpt, prePressure, preWindspeed, windspeed, dewpt, pressure, precipTotal := 00.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
-	var Location, Minwhen, mini, date, time = "", "", "", "", ""
+	var temperature, humidity, preHumidity, preDewpt, prePressure, preWindspeed, windspeed, dewpt, pressure, precipTotal float64
+	var Location, Minwhen, mini, date, time string
 	MinT := math.Inf(0)
 
 	for _, data := range weatherData {
