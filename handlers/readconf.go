@@ -75,7 +75,7 @@ func GetSSLName() string {
 		log.Fatal(err)
 	}
 
-	certName := fmt.Sprintf("%s", cert.Subject)
+	certName := cert.Subject.String()
 	parts := strings.Split(certName, "=")
 
 	if len(parts) == 2 {
