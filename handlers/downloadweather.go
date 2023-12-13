@@ -9,14 +9,14 @@ import (
 	"time"
 )
 
+// DownloadWeather is the function that initiates the download loop / retry
 func DownloadWeather() {
 	config := GetConfig()
 
 	for {
-		err := downloadWeather() // Replace with the actual function you want to execute
+		err := downloadWeather()
 
 		if err == nil {
-			fmt.Println("Task completed successfully!")
 			break
 		}
 
@@ -27,6 +27,7 @@ func DownloadWeather() {
 
 }
 
+// downloadWeather fuction initiates the url check and download the data if possible
 func downloadWeather() error {
 
 	config := GetConfig()
