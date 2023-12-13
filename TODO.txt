@@ -1,5 +1,5 @@
 
+** Just a few more things to complete but already working on it** 
 * Add more guidance on running in the background
 * Create an admin page to help configure the conf.json file through web
 * Add security check (API key) to /json URL for personal use only
-* Add SSL/HTTPS to the web chart and admin
