@@ -65,7 +65,8 @@ nil					freetext(character)			string		description		broken clouds
     "CertPemPATH": [""]											(String with Full PATH to you /path/cert.pem)
 }
 ```
-**PostgreSQL database structure example and syntax**
+**PostgreSQL database structure example and syntax**<BR>
+*There is a script under sertup flder called setup/create_table.sql*
 
 ```
 CREATE TABLE public.easyweather (
@@ -98,7 +99,15 @@ CREATE TABLE public.easyweather (
 );
 ```
 
-When everything is created and configured like your PostgreSQL database and your config and API accounts
+When everything is created and configured like your PostgreSQL database and your config and API accounts! The first thing yu should do is run an integrity check to make sure everything is working and configured using the --integrity flag<BR>
+
+The compile script creates easyweather.exe but you can compile the program manually if you want:<BR>
+*go build -o easyweather.exe *.go*
+*go build -o easyweather *.go*
+*go build -o easyweather-$(uname)-$(uname -m) *.go*
+
+**Function to run through the setup and check the integrity of the application setup**<BR>
+*./compile.sh && ./easyweather.exe --integrity*<BR>
 
 **Quick example how to compile and lanch the application for data collection**<BR>
 *./compile.sh && ./easyweather.exe --collect*<BR>
@@ -106,5 +115,13 @@ When everything is created and configured like your PostgreSQL database and your
 **Quick example how to compile and lanch the application to launch the web interface!**<BR>
 *./compile.sh && ./easyweather.exe --web*<BR>
 
-**Function to run through the setup and check the integrity of the application setup**<BR>
-*./compile.sh && ./easyweather.exe --integrity*<BR>
+To run the program you will need to set it in the background to collect and to serve the web!<BR><BR>
+Linux Example:<BR>
+*cd /server/easyweather && /usr/bin/screen -dmS WEATHER-GUI /server/easyweather/easyweather-Linux-aarch64 --web*<BR>
+*cd /server/easyweather && /usr/bin/screen -dmS WEATHER-COL /server/easyweather/easyweather-Linux-aarch64 --collect*<BR><BR>
+Windows Example (CMD):<BR>
+*C:\Users\ricar\easyweather> start /b easyweather.exe --web*<BR>
+*C:\Users\ricar\easyweather> start /b easyweather.exe --collect*<BR><BR>
+Windows Example (PS):<BR>
+*PS C:\Users\ricar\easyweather> Start-Process -FilePath ".\easyweather.exe" -ArgumentList "--web" -NoNewWindow -PassThru | Out-Null*<BR>
+*PS C:\Users\ricar\easyweather> Start-Process -FilePath ".\easyweather.exe" -ArgumentList "--collect" -NoNewWindow -PassThru | Out-Null*<BR>
