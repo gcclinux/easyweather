@@ -104,7 +104,7 @@ When everything is created and configured like your PostgreSQL database and your
 The compile script creates easyweather.exe but you can compile the program manually if you want:<BR>
 *go build -o easyweather.exe *.go*<BR>
 *go build -o easyweather *.go*<BR>
-*go build -o easyweather-$(uname)-$(uname -m) *.go*<BR>
+*go build -o easyweather-\$(uname)-\$(uname -m) *.go*<BR>
 
 **Function to run through the setup and check the integrity of the application setup**<BR>
 *./compile.sh && ./easyweather.exe --integrity*<BR>
