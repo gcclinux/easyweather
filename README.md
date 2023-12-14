@@ -102,9 +102,9 @@ CREATE TABLE public.easyweather (
 When everything is created and configured like your PostgreSQL database and your config and API accounts! The first thing yu should do is run an integrity check to make sure everything is working and configured using the --integrity flag<BR>
 
 The compile script creates easyweather.exe but you can compile the program manually if you want:<BR>
-*go build -o easyweather.exe *.go*
-*go build -o easyweather *.go*
-*go build -o easyweather-$(uname)-$(uname -m) *.go*
+*go build -o easyweather.exe *.go*<BR>
+*go build -o easyweather *.go*<BR>
+*go build -o easyweather-$(uname)-$(uname -m) *.go*<BR>
 
 **Function to run through the setup and check the integrity of the application setup**<BR>
 *./compile.sh && ./easyweather.exe --integrity*<BR>
