@@ -12,7 +12,7 @@ func SaveWeatherData(weatherData WeatherData) {
 		log.Fatal(err)
 	}
 
-	config := GetConfig()
+	config := GetConfig("conf.json")
 
 	//fmt.Printf("SaveWeatherData: %+v", weatherData)
 

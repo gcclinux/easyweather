@@ -12,30 +12,11 @@ import (
 )
 
 /*
-GetConfig() returns all the conf.json values
-
-		type Config struct {
-		DB_HOST         []string `json:"DB_HOST"`
-		DB_PORT         []string `json:"DB_PORT"`
-		DB_USER         []string `json:"DB_USER"`
-		DB_PASS         []string `json:"DB_PASS"`
-		DB_NAME         []string `json:"DB_NAME"`
-		TB_NAME         []string `json:"TB_NAME"`
-		OpenWeatherApi  []string `json:"OpenWeatherApi"`
-		WundergroundApi []string `json:"WundergroundApi"`
-		StationId       []string `json:"StationId"`
-		WebPort         []string `json:"WebPort"`
-		Language        []string `json:"Language"`
-		DefaultCity     []string `json:"DefaultCity"`
-		Interval        []int    `json:"Interval"`
-		Retry 			[]int	 `json:"Retry"`
-	    PrivKeyPATH     []string `json:"PrivKeyPATH"`
-	    CertPemPATH     []string `json:"CertPemPATH"`
-		}
+GetConfig() returns all the a json file variables
 */
-func GetConfig() Config {
+func GetConfig(name string) Config {
 	pwd, _ := filepath.Abs(filepath.Dir(os.Args[0]))
-	filePath := "/conf/conf.json"
+	filePath := "/conf/" + name
 
 	file, err := os.Open(pwd + filePath)
 	if err != nil {
@@ -54,7 +35,7 @@ func GetConfig() Config {
 
 func GetSSLName() string {
 
-	pemFilePath := GetConfig().CertPemPATH[0]
+	pemFilePath := GetConfig("conf.json").CertPemPATH[0]
 	value := ""
 
 	// Read the PEM file

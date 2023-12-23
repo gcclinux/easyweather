@@ -11,7 +11,7 @@ import (
 )
 
 func LaunchWeb() {
-	var address = fmt.Sprintf("%s:%s", GetOutboundIP(), GetConfig().WebPort[0])
+	var address = fmt.Sprintf("%s:%s", GetOutboundIP(), GetConfig("conf.json").WebPort[0])
 
 	// Define the endpoint
 	http.HandleFunc("/json", JsonHandler)
@@ -20,12 +20,12 @@ func LaunchWeb() {
 	// Adding additional required directories
 	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("js"))))
 
-	if isEmpty(GetConfig().PrivKeyPATH[0]) || isEmpty(GetConfig().CertPemPATH[0]) {
+	if isEmpty(GetConfig("conf.json").PrivKeyPATH[0]) || isEmpty(GetConfig("conf.json").CertPemPATH[0]) {
 		fmt.Printf("Listening on http://%s\n", address)
 		http.ListenAndServe(address, nil)
 	} else {
-		fmt.Printf("Listening on https://%s:%s\n", GetSSLName(), GetConfig().WebPort[0])
-		err := http.ListenAndServeTLS(fmt.Sprintf("%v", address), GetConfig().CertPemPATH[0], GetConfig().PrivKeyPATH[0], nil)
+		fmt.Printf("Listening on https://%s:%s\n", GetSSLName(), GetConfig("conf.json").WebPort[0])
+		err := http.ListenAndServeTLS(fmt.Sprintf("%v", address), GetConfig("conf.json").CertPemPATH[0], GetConfig("conf.json").PrivKeyPATH[0], nil)
 		if err != nil {
 			log.Println(err)
 		}

@@ -11,7 +11,7 @@ import (
 // CollectLoop is the function that collect the data periodically based on the interval setting
 func CollectLoop() {
 
-	config := GetConfig()
+	config := GetConfig("conf.json")
 
 	// Create a channel to signal the goroutine to stop
 	stopChan := make(chan struct{})

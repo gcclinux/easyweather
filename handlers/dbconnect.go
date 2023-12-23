@@ -11,7 +11,7 @@ import (
 
 func GetDBConnection() (*sql.DB, error) {
 
-	configuration := GetConfig()
+	configuration := GetConfig("conf.json")
 
 	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		configuration.DB_HOST[0], configuration.DB_PORT[0], configuration.DB_USER[0], configuration.DB_PASS[0], configuration.DB_NAME[0])

@@ -22,7 +22,7 @@ func SetupIntegraty() string {
 		// Json config file PATH
 		pwd, _ := filepath.Abs(filepath.Dir(os.Args[0]))
 		filePath := "/conf/conf.json"
-		config := GetConfig()
+		config := GetConfig("conf.json")
 
 		// Check if config file exist
 		jsonData, err := os.ReadFile(pwd + filePath)

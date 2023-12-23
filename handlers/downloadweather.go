@@ -11,7 +11,7 @@ import (
 
 // DownloadWeather is the function that initiates the download loop / retry
 func DownloadWeather() {
-	config := GetConfig()
+	config := GetConfig("conf.json")
 
 	for {
 		err := downloadWeather()
@@ -30,7 +30,7 @@ func DownloadWeather() {
 // downloadWeather fuction initiates the url check and download the data if possible
 func downloadWeather() error {
 
-	config := GetConfig()
+	config := GetConfig("conf.json")
 
 	StationId := config.StationId[0]
 	OpenWeatherApi := config.OpenWeatherApi[0]
@@ -85,7 +85,7 @@ func getOpenWeather() (bool, string, WeatherData) {
 	var url, error string
 	status := true
 
-	config := GetConfig()
+	config := GetConfig("conf.json")
 
 	url = fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=%s&lang=%s&units=metric&APPID=%s",
 		config.DefaultCity[0], config.Language[0], config.OpenWeatherApi[0])
@@ -180,7 +180,7 @@ func getWunderground() (bool, string, WeatherData) {
 	var url, error string
 	status := true
 
-	config := GetConfig()
+	config := GetConfig("conf.json")
 
 	url = fmt.Sprintf("https://api.weather.com/v2/pws/observations/current?stationId=%s&format=json&units=m&apiKey=%s&numericPrecision=decimal",
 		config.StationId[0], config.WundergroundApi[0])
