@@ -13,7 +13,7 @@ func GetWeatherData() []WeatherStruct {
 	}
 
 	config := GetConfig("conf.json")
-	query := fmt.Sprintf("SELECT mt.obstimelocal, mt.neighborhood, mt.winddir, mt.humidity, mt.temp, mt.dewpt, mt.windchill, mt.windspeed, mt.pressure, mt.preciptotal FROM %s AS mt WHERE mt.obstimelocal >= CURRENT_DATE AND mt.obstimelocal < (CURRENT_DATE + '1 day'::interval) ORDER BY mt.id ASC;", config.TB_NAME[0])
+	query := fmt.Sprintf("SELECT mt.obstimelocal, mt.neighborhood, mt.winddir, mt.humidity, mt.temp, mt.dewpt, mt.windchill, mt.windspeed, mt.pressure, mt.preciptotal FROM %s AS mt WHERE mt.neighborhood = '%s' AND mt.obstimelocal >= CURRENT_DATE AND mt.obstimelocal < (CURRENT_DATE + '1 day'::interval) ORDER BY mt.id ASC;", config.TB_NAME[0], config.DefaultCity[0])
 
 	// Execute the query
 	rows, err := db.Query(query)

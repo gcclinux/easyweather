@@ -33,6 +33,25 @@ func GetConfig(name string) Config {
 	return configuration
 }
 
+func getLanguage(name string) Languages {
+	pwd, _ := filepath.Abs(filepath.Dir(os.Args[0]))
+	filePath := "/conf/" + name
+
+	file, err := os.Open(pwd + filePath)
+	if err != nil {
+		fmt.Println("file error:", err)
+		os.Exit(3)
+	}
+
+	decoder := json.NewDecoder(file)
+	configuration := Languages{}
+	err = decoder.Decode(&configuration)
+	if err != nil {
+		fmt.Println("Error in decoding conf.json:", err)
+	}
+	return configuration
+}
+
 func GetSSLName() string {
 
 	pemFilePath := GetConfig("conf.json").CertPemPATH[0]

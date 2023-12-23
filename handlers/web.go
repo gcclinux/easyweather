@@ -37,6 +37,7 @@ func LaunchWeb() {
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 
 	weatherData := GetWeatherData()
+	language := getLanguage("language.json")
 
 	var temperature, humidity, preHumidity, preDewpt, prePressure, preWindspeed, windspeed, dewpt, pressure, precipTotal float64
 	var Location, Minwhen, mini, date, time string
@@ -76,21 +77,26 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ParseWeather := WeatherStruct{
-		Temp:         temperature,
-		Humidity:     humidity,
-		Neighborhood: Location,
-		PreLow:       mini,
-		PreWhen:      Minwhen,
-		Date:         date,
-		PreHumidity:  preHumidity,
-		PreDewpt:     preDewpt,
-		PrePressure:  prePressure,
-		Dewpt:        dewpt,
-		PreWindspeed: preWindspeed,
-		WindSpeed:    windspeed,
-		Pressure:     pressure,
-		Time:         time,
-		PrecipTotal:  precipTotal,
+		Temp:          temperature,
+		Humidity:      humidity,
+		Neighborhood:  Location,
+		PreLow:        mini,
+		PreWhen:       Minwhen,
+		Date:          date,
+		PreHumidity:   preHumidity,
+		PreDewpt:      preDewpt,
+		PrePressure:   prePressure,
+		Dewpt:         dewpt,
+		PreWindspeed:  preWindspeed,
+		WindSpeed:     windspeed,
+		Pressure:      pressure,
+		Time:          time,
+		PrecipTotal:   precipTotal,
+		LangTemp:      language.TEMPERATURE[0],
+		LangHum:       language.HUMIDITY[0],
+		LangDew:       language.DEWPOINT[0],
+		LangRainTotal: language.TOTALRAIN[0],
+		LangPressure:  language.PRESSURE[0],
 	}
 
 	tmpl, err := template.ParseFiles("html/home.html")

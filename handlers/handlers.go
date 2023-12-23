@@ -129,23 +129,39 @@ type Sys struct {
 }
 
 type WeatherStruct struct {
-	Obstimelocal string
-	Neighborhood string
-	Winddir      float64
-	Humidity     float64
-	Temp         float64
-	Dewpt        float64
-	WindChill    float64
-	WindSpeed    float64
-	Pressure     float64
-	Max          float64
-	PreLow       string
-	PreWhen      string
-	Date         string
-	Time         string
-	PreHumidity  float64
-	PreDewpt     float64
-	PrePressure  float64
-	PreWindspeed float64
-	PrecipTotal  float64
+	Obstimelocal  string
+	Neighborhood  string
+	Winddir       float64
+	Humidity      float64
+	Temp          float64
+	Dewpt         float64
+	WindChill     float64
+	WindSpeed     float64
+	Pressure      float64
+	Max           float64
+	PreLow        string
+	PreWhen       string
+	Date          string
+	Time          string
+	PreHumidity   float64
+	PreDewpt      float64
+	PrePressure   float64
+	PreWindspeed  float64
+	PrecipTotal   float64
+	LangTemp      string
+	LangHum       string
+	LangDew       string
+	LangSpeed     string
+	LangRainTotal string
+	LangPressure  string
+}
+
+// Languages contrsuct file
+type Languages struct {
+	TEMPERATURE []string `json:"TEMPERATURE"`
+	HUMIDITY    []string `json:"HUMIDITY"`
+	DEWPOINT    []string `json:"DEWPOINT"`
+	WINDSPEED   []string `json:"WINDSPEED"`
+	TOTALRAIN   []string `json:"TOTALRAIN"`
+	PRESSURE    []string `json:"PRESSURE"`
 }

@@ -1,3 +1,8 @@
 {
-    "TEMPERATURE": ["Temperatura"]
+    "TEMPERATURE": ["Temperatura"],
+    "HUMIDITY": ["Humidade"],
+    "DEWPOINT": ["Ponto de Orvalho"],
+    "WINDSPEED": ["Velocidade do vento"],
+    "TOTALRAIN": ["Quantidade de Chuva hoje"],
+    "PRESSURE": ["Pressão atmosférica"]
 }
