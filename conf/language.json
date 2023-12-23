@@ -4,5 +4,9 @@
     "DEWPOINT": ["Ponto de Orvalho"],
     "WINDSPEED": ["Velocidade do vento"],
     "TOTALRAIN": ["Quantidade de Chuva hoje"],
-    "PRESSURE": ["Pressão atmosférica"]
+    "PRESSURE": ["Pressão atmosférica"],
+    "LOWEST": ["mais baixa"],
+    "HIGHEST": ["mais alta"],
+    "DATE": ["Data"],
+    "TIME": ["Horario"]
 }

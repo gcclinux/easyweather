@@ -56,20 +56,20 @@
 
 </style>
 <meta charset="UTF-8">
-<title>EasyWeather Chart</title>
+<title>EasyWeather</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"></script>
 </head>
 <body style="font-family:Verdana;">
 
 <div class="rounded" style="background-color:#f1f1f1;padding:15px;">
-  <h1 style="font-size:250%;text-align:center;font-family:candara;font-weight: bolder;">EasyWeather Station</h1>
+  <h1 style="font-size:250%;text-align:center;font-family:candara;font-weight: bolder;">EasyWeather</h1>
 </div>
 
 <div style="overflow:auto">
   <div class="menu rounded">
     <p style="margin: 0;text-align:center;font-family:candara; color:rgb(0, 0, 0); font-size:180%;"><B>{{.Neighborhood}}</B></p>
-    <p style="margin: 0;text-align:center;font-family:candara; color:white; font-size:150%;">{{.Time}}</p>
+    <p style="margin: 0;text-align:center;font-family:candara; color:white; font-size:150%;">{{.RemoteDate}}</p>
     <BR>
     <table>
         <tr>
@@ -93,7 +93,7 @@
       </tr> 
       <tr>
           
-          <td style="width:100%;font-size:80%;">{{.LangDew}}</td>
+          <td style="width:100%;font-size:80%;">{{.LangSpeed}}</td>
         </tr> 
         <tr>
           <td style="width:100%;font-size:150%;color:white;">{{.WindSpeed}} km/h</td>
@@ -126,21 +126,21 @@
   <div class="right rounded">
     <p style="margin: 0;text-align:center;font-family:candara; color:rgb(0, 0, 0); font-size:180%;"><B>Today's Peeks</B></p>
     <BR>
-    <p style="margin: 0%; font-family:candara; width:70%;font-size:100%;">Date</p>
+    <p style="margin: 0%; font-family:candara; width:70%;font-size:100%;">{{.LangDate}}</p>
     <p style="margin: 0%; font-family:candara; font-size:130%;font-family:courier;color: white;"><B>{{.Date}}</B></p>
-    <p style="margin: 0%; font-family:candara; width:70%;font-size:100%;">Time</p>
-    <p style="margin: 0%; font-family:candara; font-size:130%;font-family:courier;color: white;"><B>{{.PreWhen}}</B></p>
-    <p style="margin: 0%; margin-top: 5%; width:70%;font-size:80%;">Lowest Temperature</p>
+    <p style="margin: 0%; margin-top: 5%; width:70%;font-size:80%;">{{.LangTemp}} {{.LangLowest}}</p>
     <p style="margin: 0%; width:75%;font-size:130%;color:white;">{{.PreLow}} ℃ </p>
-    <p style="margin: 0%; width:70%;font-size:80%;">Dew point</p>
+    <p style="margin: 0%; width:70%;font-size:80%;">{{.LangTemp}}  {{.LangHighest}}</p>
+    <p style="margin: 0%; width:75%;font-size:130%;color:white;">{{.Max}} ℃ </p>
+    <p style="margin: 0%; margin-top: 5%; width:70%;font-size:80%;">{{.LangDew}}</p>
     <p style="margin: 0%; width:75%;font-size:130%;color:white;">{{.PreDewpt}} ℃ </p>
-    <p style="margin: 0%; width:70%;font-size:80%;">Humidity</p>
+    <p style="margin: 0%; width:70%;font-size:80%;">{{.LangHum}}</p>
     <p style="margin: 0%; width:75%;font-size:130%;color:white;">{{.PreHumidity}} % </p>
-    <p style="margin: 0%; width:70%;font-size:80%;">Wind Speed</p>
+    <p style="margin: 0%; width:70%;font-size:80%;">{{.LangSpeed}}</p>
     <p style="margin: 0%; width:75%;font-size:130%;color:white;">{{.PreWindspeed}} km/h </p>
-    <p style="margin: 0%; width:70%;font-size:80%;">Total Rain</p>
+    <p style="margin: 0%; width:70%;font-size:80%;">{{.LangRainTotal}}</p>
     <p style="margin: 0%; width:75%;font-size:130%;color:white;">{{.PrecipTotal}} mm </p> 
-    <p style="margin: 0%; width:70%;font-size:80%;">Pressure</p>
+    <p style="margin: 0%; width:70%;font-size:80%;">{{.LangPressure}}</p>
     <p style="margin: 0%; width:75%;font-size:130%;color:white;">{{.PrePressure}} hPa </p> 
   </div>
 </div>

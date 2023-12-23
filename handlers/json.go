@@ -10,9 +10,15 @@ import (
 func JsonHandler(w http.ResponseWriter, r *http.Request) {
 	weatherData := GetWeatherData()
 	MinT := math.Inf(0)
+	var TimeLocal string
 
 	for i := range weatherData {
-		TimeLocal := weatherData[i].Obstimelocal[11:19]
+		if GetConfig("conf.json").AdjustTime[0] {
+			TimeLocal = AdjustTimeTime(weatherData[i].Obstimelocal, GetConfig("conf.json").TimeZone[0])[11:19]
+		} else {
+			TimeLocal = weatherData[i].Obstimelocal[11:19]
+		}
+
 		weatherData[i].Obstimelocal = TimeLocal
 		if weatherData[i].Temp < MinT {
 			MinT = weatherData[i].Temp

@@ -61,6 +61,8 @@ func SetupIntegraty() string {
 			len(config.DefaultCity) == 1 &&
 			len(config.PrivKeyPATH) == 1 &&
 			len(config.CertPemPATH) == 1 &&
+			len(config.TimeZone) == 1 &&
+			len(config.AdjustTime) == 1 &&
 			len(config.Retry) == 1 &&
 			len(config.Interval) == 1 {
 			msg += "\n>> Reading Config integrity! Status OK"

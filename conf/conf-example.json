@@ -14,5 +14,7 @@
     "Interval": [10],
     "Retry": [10],
     "PrivKeyPATH": [""],
-    "CertPemPATH": [""]
+    "CertPemPATH": [""],
+    "TimeZone": [-10800],
+    "AdjustTime": [true]
 }

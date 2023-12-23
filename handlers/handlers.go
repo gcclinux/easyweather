@@ -20,6 +20,8 @@ type Config struct {
 	Retry           []int    `json:"Retry"`
 	PrivKeyPATH     []string `json:"PrivKeyPATH"`
 	CertPemPATH     []string `json:"CertPemPATH"`
+	TimeZone        []int    `json:"TimeZone"`
+	AdjustTime      []bool   `json:"AdjustTime"`
 }
 
 // Metric represents the nested "metric" object in the JSON structure
@@ -59,6 +61,8 @@ type Observation struct {
 	PreHumidity       float64   `json:"prehumidity"`
 	PreDewpt          float64   `json:"predewpt"`
 	PrePressure       float64   `json:"prepressure"`
+	Freetext          string    `json:"freetext"`
+	RemoteDate        string    `json:"remotedate"`
 }
 
 // WeatherData represents the overall JSON structure
@@ -132,13 +136,14 @@ type WeatherStruct struct {
 	Obstimelocal  string
 	Neighborhood  string
 	Winddir       float64
+	Epoch         int
 	Humidity      float64
 	Temp          float64
 	Dewpt         float64
 	WindChill     float64
 	WindSpeed     float64
 	Pressure      float64
-	Max           float64
+	Max           string
 	PreLow        string
 	PreWhen       string
 	Date          string
@@ -148,12 +153,18 @@ type WeatherStruct struct {
 	PrePressure   float64
 	PreWindspeed  float64
 	PrecipTotal   float64
+	Freetext      string
+	RemoteDate    string
 	LangTemp      string
 	LangHum       string
 	LangDew       string
 	LangSpeed     string
 	LangRainTotal string
 	LangPressure  string
+	LangHighest   string
+	LangLowest    string
+	LangTime      string
+	LangDate      string
 }
 
 // Languages contrsuct file
@@ -164,4 +175,8 @@ type Languages struct {
 	WINDSPEED   []string `json:"WINDSPEED"`
 	TOTALRAIN   []string `json:"TOTALRAIN"`
 	PRESSURE    []string `json:"PRESSURE"`
+	LOWEST      []string `json:"LOWEST"`
+	HIGHEST     []string `json:"HIGHEST"`
+	TIME        []string `json:"TIME"`
+	DATE        []string `json:"DATE"`
 }
