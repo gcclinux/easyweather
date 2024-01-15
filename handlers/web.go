@@ -125,6 +125,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		LangHighest:   language.HIGHEST[0],
 		LangTime:      language.TIME[0],
 		LangDate:      language.DATE[0],
+		LangPeaks:     language.PEAKS[0],
 	}
 
 	tmpl, err := template.ParseFiles("html/home.html")

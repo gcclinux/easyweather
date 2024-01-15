@@ -165,6 +165,7 @@ type WeatherStruct struct {
 	LangLowest    string
 	LangTime      string
 	LangDate      string
+	LangPeaks     string
 }
 
 // Languages contrsuct file
@@ -179,4 +180,5 @@ type Languages struct {
 	HIGHEST     []string `json:"HIGHEST"`
 	TIME        []string `json:"TIME"`
 	DATE        []string `json:"DATE"`
+	PEAKS       []string `json:"PEAKS"`
 }

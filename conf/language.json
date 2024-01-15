@@ -8,5 +8,6 @@
     "LOWEST": ["mais baixa"],
     "HIGHEST": ["mais alta"],
     "DATE": ["Data"],
-    "TIME": ["Horario"]
+    "TIME": ["Horario"],
+    "PEAKS": ["Picos de Hoje"]
 }
