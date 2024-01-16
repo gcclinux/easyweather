@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 #
-go build -o easyweather.exe *.go
+go build -o easyweather-$(uname)-$(uname -m) *.go
